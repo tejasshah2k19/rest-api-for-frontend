@@ -16,6 +16,15 @@ public class UserEntity {
 	String email;
 	String password;
 	int roleId;
+	String authToken;
+
+	public String getAuthToken() {
+		return authToken;
+	}
+
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
 
 	public int getRoleId() {    
 		return roleId;

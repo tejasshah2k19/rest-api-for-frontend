@@ -24,11 +24,14 @@ public class SessionController {
 		ResponseEntity<UserEntity> responseEntity = new ResponseEntity<>();
 
 		UserEntity userEntity = user.findByEmail(login.getEmail());
-	
+		
 		if (userEntity == null || !userEntity.getPassword().equals(login.getPassword())) {
 			responseEntity.setStatus(-1);
 			responseEntity.setMsg("Invalid Credentials");
 		}else {
+			long random = (long)(Math.random()*1000000000);
+			
+			userEntity.setAuthToken(random+"");
 			responseEntity.setStatus(200);
 			responseEntity.setMsg("Login done");
 			responseEntity.setData(userEntity);
