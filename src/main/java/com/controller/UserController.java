@@ -19,24 +19,5 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 
-	@PostMapping("/saveuser")
-	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity user) {
-
-		System.out.println(user.getEmail());
-		System.out.println(user.getFirstName());
-		System.out.println(user.getPassword());
-
-		user.setRoleId(RoleBean.Role.USER.getRoleId());
-
-		userRepository.save(user);
-
-		ResponseEntity<UserEntity> response = new ResponseEntity<>();
-		response.setData(user);
-		response.setMsg("user successfully save");
-		response.setStatus(200);
-
-		return response;
-	}
-
  
 }
