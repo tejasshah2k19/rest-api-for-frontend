@@ -32,3 +32,12 @@ Delete Ingredient :-  DELETE  https://healthy-me-rest-api.herokuapp.com/api/ingr
 
 
 For Browser - REST DOC : https://healthy-me-rest-api.herokuapp.com/swagger-ui.html
+
+
+###  NOTES ### 
+If you get invalid user or invalid access error then, 
+
+you need To login before access this api , once you login into server you will get authToken to access the api. 
+
+In authentication api you will get authToke , you need to set this token in every request then only you can access api. 
+
