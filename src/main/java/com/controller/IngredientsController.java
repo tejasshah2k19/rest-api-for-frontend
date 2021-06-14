@@ -20,7 +20,6 @@ import com.model.ResponseEntity;
 import com.repository.IngredientRepository;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api")
 public class IngredientsController {
 
