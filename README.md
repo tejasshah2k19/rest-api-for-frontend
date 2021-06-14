@@ -35,9 +35,9 @@ For Browser - REST DOC : https://healthy-me-rest-api.herokuapp.com/swagger-ui.ht
 
 
 ###  NOTES ### 
-If you get invalid user or invalid access error then, 
+If you get invalid user or invalid access error then, You must need to add authToke in header for every request. 
 
-you need To login before access this api , once you login into server you will get authToken to access the api. 
+How can i get authToken ? you need To login (use authentication api from doc ) , once you login into server you will get authToken to access the api. 
 
 In authentication api you will get authToke , you need to set this token in every request then only you can access api. 
 
