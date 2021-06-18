@@ -30,7 +30,11 @@ public class AuthTokenValidator implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		System.out.println("tokeng filter...");
-		if (((HttpServletRequest) request).getRequestURL().toString().contains("authenticate")) {
+		if (((HttpServletRequest) request).getRequestURL().toString().contains("authenticate")
+				|| ((HttpServletRequest) request).getRequestURL().toString().contains("swagger")
+				
+				
+				) {
 			chain.doFilter(request, response);
 		} else {
 			String authToken = ((HttpServletRequest) request).getHeader("authToken");
