@@ -2,6 +2,8 @@ package com.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,14 +27,14 @@ public class SessionController {
 		ResponseEntity<UserEntity> responseEntity = new ResponseEntity<>();
 
 		UserEntity userEntity = userRepository.findByEmail(login.getEmail());
-		
+
 		if (userEntity == null || !userEntity.getPassword().equals(login.getPassword())) {
 			responseEntity.setStatus(-1);
 			responseEntity.setMsg("Invalid Credentials");
-		}else {
-			long random = (long)(Math.random()*1000000000);
-			
-			userEntity.setAuthToken(random+"");
+		} else {
+			long random = (long) (Math.random() * 1000000000);
+
+			userEntity.setAuthToken(random + "");
 			userRepository.save(userEntity);
 			responseEntity.setStatus(200);
 			responseEntity.setMsg("Login done");
@@ -41,7 +43,6 @@ public class SessionController {
 		}
 		return responseEntity;
 	}
-
 
 	@PostMapping("/saveuser")
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity user) {
@@ -60,6 +61,29 @@ public class SessionController {
 		response.setStatus(200);
 
 		return response;
+	}
+
+	@GetMapping("/forgetpassword/{email}")
+	public ResponseEntity<UserEntity> forgetPassword(@PathVariable("email") String email) {
+		UserEntity user = null;
+		ResponseEntity<UserEntity> res = new ResponseEntity<>();
+		try {
+			user = userRepository.findByEmail(email);
+		} catch (Exception e) {
+
+		}
+
+		if (user == null) {
+			res.setMsg("Invalid Email Address");
+			res.setStatus(-1);
+
+		} else {
+			//send mail 
+			res.setMsg("ResetPasword Link sent to your email");
+			res.setStatus(200);
+			res.setData(user);
+		}
+		return res;
 	}
 
 }

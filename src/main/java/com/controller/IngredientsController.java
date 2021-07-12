@@ -111,4 +111,15 @@ public class IngredientsController {
 		return resp;
 	}
 	
+	@GetMapping("/ingredientwitherror/{id}")
+	public ResponseEntity<IngredientEntity> getIngredientByIdWithError(@PathVariable("id") Long id) {
+		ResponseEntity<IngredientEntity> resp = new ResponseEntity<>();
+			IngredientEntity ing = ingredientRepository.findById(id).get();//500
+
+			resp.setData(ing);
+			resp.setMsg("Item retrvied");
+			resp.setStatus(200);
+		 
+		return resp;
+	}
 }
