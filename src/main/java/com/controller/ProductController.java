@@ -37,7 +37,7 @@ public class ProductController {
 	public ResponseEntity<List<ProductEntity>> getAllProducts() {
 		ResponseEntity<List<ProductEntity>> res = new ResponseEntity<>();
 		res.setData(productRepository.findAll());
-		res.setMsg("product added");
+		res.setMsg("product retrieved");
 		res.setStatus(200);
 		return res;
 	}
