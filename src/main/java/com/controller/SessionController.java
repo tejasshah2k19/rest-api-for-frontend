@@ -65,6 +65,25 @@ public class SessionController {
 		return response;
 	}
 
+	@PostMapping("/saveuser2")
+	public ResponseEntity<UserEntity> saveUser2(UserEntity user) {
+
+		System.out.println(user.getEmail());
+		System.out.println(user.getFirstName());
+		System.out.println(user.getPassword());
+
+		user.setRoleId(RoleBean.Role.USER.getRoleId());
+
+		userRepository.save(user);
+
+		ResponseEntity<UserEntity> response = new ResponseEntity<>();
+		response.setData(user);
+		response.setMsg("user successfully save");
+		response.setStatus(200);
+
+		return response;
+	}
+
 	@GetMapping("/forgetpassword/{email}")
 	public ResponseEntity<UserEntity> forgetPassword(@PathVariable("email") String email) {
 		UserEntity user = null;
