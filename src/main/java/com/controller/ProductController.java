@@ -33,6 +33,19 @@ public class ProductController {
 		return res;
 	}
 
+	
+	@PostMapping("/products2")
+	public ResponseEntity<ProductEntity> addProduct2( ProductEntity product) {
+
+		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
+		productRepository.save(product);
+		res.setData(product);
+		res.setMsg("product added");
+		res.setStatus(200);
+
+		return res;
+	}
+
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductEntity>> getAllProducts() {
 		ResponseEntity<List<ProductEntity>> res = new ResponseEntity<>();
@@ -64,17 +77,17 @@ public class ProductController {
 		productRepository.deleteById(productId);
 		return res;
 	}
-	
+
 	@PutMapping("/products")
 	public ResponseEntity<ProductEntity> updateProduct(@RequestBody ProductEntity product) {
 
 		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
-		
+
 		ProductEntity updateProduct = productRepository.getById(product.getProductId());
 		updateProduct.setName(product.getName());
 		updateProduct.setPrice(updateProduct.getPrice());
 		updateProduct.setQty(updateProduct.getQty());
-		
+
 		productRepository.save(updateProduct);
 		res.setData(product);
 		res.setMsg("product updated");
@@ -82,8 +95,23 @@ public class ProductController {
 
 		return res;
 	}
-	
-	
-	
-}
 
+	@PutMapping("/products2")
+	public ResponseEntity<ProductEntity> updateProduct2( ProductEntity product) {
+
+		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
+
+		ProductEntity updateProduct = productRepository.getById(product.getProductId());
+		updateProduct.setName(product.getName());
+		updateProduct.setPrice(updateProduct.getPrice());
+		updateProduct.setQty(updateProduct.getQty());
+
+		productRepository.save(updateProduct);
+		res.setData(product);
+		res.setMsg("product updated");
+		res.setStatus(200);
+
+		return res;
+	}
+
+}
