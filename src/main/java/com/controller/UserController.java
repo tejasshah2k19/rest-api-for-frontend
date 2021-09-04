@@ -28,9 +28,10 @@ public class UserController {
 		boolean isError = false;
 		try {
 			UserEntity user = userRepository.getById(userId);
+			System.out.println(user);
 			if (user != null) {
 				userRepository.delete(user);
-				res.setData(user);
+				res.setData(null);
 				res.setMsg("user removed");
 				res.setStatus(200);
 			} else {
