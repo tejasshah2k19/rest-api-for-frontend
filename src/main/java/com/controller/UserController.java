@@ -3,6 +3,7 @@ package com.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,30 @@ public class UserController {
 			res.setStatus(-1);
 		}
 		return res;
+	}
+
+	@GetMapping("/users/{userId}")
+	public ResponseEntity<UserEntity> getUserById(@PathVariable("userId") int userId) {
+
+		ResponseEntity<UserEntity> resp = new ResponseEntity<>();
+
+		UserEntity user = null;
+
+		try {
+			user = userRepository.getById(userId);
+		} catch (Exception e) {
+			System.out.println("invalid id" + e.getMessage());
+		}
+		if (user == null) {
+			resp.setData(null);
+			resp.setStatus(-1);
+			resp.setMsg("Invalid userId : userNot Found");
+		} else {
+			resp.setData(user);
+			resp.setStatus(200);
+			resp.setMsg("user found");
+		}
+		return resp;
 	}
 
 }
