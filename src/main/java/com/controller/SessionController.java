@@ -46,6 +46,29 @@ public class SessionController {
 		return responseEntity;
 	}
 
+	@PostMapping("/authenticate2")
+	public ResponseEntity<UserEntity> authenticate2( LoginBean login) {
+
+		ResponseEntity<UserEntity> responseEntity = new ResponseEntity<>();
+
+		UserEntity userEntity = userRepository.findByEmail(login.getEmail());
+
+		if (userEntity == null || !userEntity.getPassword().equals(login.getPassword())) {
+			responseEntity.setStatus(-1);
+			responseEntity.setMsg("Invalid Credentials");
+		} else {
+			long random = (long) (Math.random() * 1000000000);
+
+			userEntity.setAuthToken(random + "");
+			userRepository.save(userEntity);
+			responseEntity.setStatus(200);
+			responseEntity.setMsg("Login done");
+			responseEntity.setData(userEntity);
+
+		}
+		return responseEntity;
+	}
+
 	@PostMapping("/saveuser")
 	public ResponseEntity<UserEntity> saveUser(@RequestBody UserEntity user) {
 
