@@ -19,7 +19,7 @@ public class CartController {
 	@Autowired
 	UserRepository userRepo;
 
-	@GetMapping("addtocart/token/productId")
+	@GetMapping("addtocart/{token}/{productId}")
 	public ResponseEntity<CartEntity> addToCart(@PathVariable("token") String token, @PathVariable("productId") int productId) {
 
 		CartEntity cart = new CartEntity();
