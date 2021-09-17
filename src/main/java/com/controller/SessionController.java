@@ -47,7 +47,7 @@ public class SessionController {
 	}
 
 	@PostMapping("/authenticate2")
-	public ResponseEntity<UserEntity> authenticate2( LoginBean login) {
+	public ResponseEntity<UserEntity> authenticate2(LoginBean login) {
 
 		ResponseEntity<UserEntity> responseEntity = new ResponseEntity<>();
 
@@ -95,7 +95,10 @@ public class SessionController {
 		System.out.println(user.getFirstName());
 		System.out.println(user.getPassword());
 
-		user.setRoleId(RoleBean.Role.USER.getRoleId());
+//		user.setRoleId(RoleBean.Role.USER.getRoleId());
+		if (user.getRoleId() != 1) {
+			user.setRoleId(RoleBean.Role.USER.getRoleId());
+		}
 
 		userRepository.save(user);
 
@@ -122,7 +125,7 @@ public class SessionController {
 			res.setStatus(-1);
 
 		} else {
-			//send mail 
+			// send mail
 			res.setMsg("ResetPasword Link sent to your email");
 			res.setStatus(200);
 			res.setData(user);
@@ -131,8 +134,8 @@ public class SessionController {
 	}
 
 	@GetMapping("/users")
-	public ResponseEntity<List<UserEntity>> getAllUsers(){
-		
+	public ResponseEntity<List<UserEntity>> getAllUsers() {
+
 		ResponseEntity<List<UserEntity>> res = new ResponseEntity<>();
 		res.setData(userRepository.findAll());
 		res.setStatus(200);
