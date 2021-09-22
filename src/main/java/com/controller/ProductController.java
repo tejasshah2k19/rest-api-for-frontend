@@ -33,9 +33,8 @@ public class ProductController {
 		return res;
 	}
 
-	
 	@PostMapping("/products2")
-	public ResponseEntity<ProductEntity> addProduct2( ProductEntity product) {
+	public ResponseEntity<ProductEntity> addProduct2(ProductEntity product) {
 
 		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
 		productRepository.save(product);
@@ -59,7 +58,11 @@ public class ProductController {
 	public ResponseEntity<ProductEntity> getProductById(@PathVariable("productId") int productId) {
 
 		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
-		res.setData(productRepository.getById(productId));
+		ProductEntity product = productRepository.getById(productId);
+		System.out.println("********************************************************");
+		System.out.println(product);
+		System.out.println("********************************************************");
+		res.setData(product);
 		res.setMsg("Product retrieved");
 		res.setStatus(200);
 		return res;
@@ -97,7 +100,7 @@ public class ProductController {
 	}
 
 	@PutMapping("/products2")
-	public ResponseEntity<ProductEntity> updateProduct2( ProductEntity product) {
+	public ResponseEntity<ProductEntity> updateProduct2(ProductEntity product) {
 
 		ResponseEntity<ProductEntity> res = new ResponseEntity<>();
 
