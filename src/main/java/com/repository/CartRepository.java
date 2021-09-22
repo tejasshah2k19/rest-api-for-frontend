@@ -9,4 +9,6 @@ import com.entity.CartEntity;
 public interface CartRepository extends JpaRepository<CartEntity, Integer> {
 
 	List<CartEntity> findById(int cartId);
+	List<CartEntity> findByUserId(int userId);
+	
 }

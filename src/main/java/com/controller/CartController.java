@@ -44,7 +44,7 @@ public class CartController {
 
 		UserEntity user = userRepo.findByAuthToken(token).get(0);
 
-		List<CartEntity> carts = cartRepo.findById(user.getUserId());
+		List<CartEntity> carts = cartRepo.findByUserId(user.getUserId());
 
 		// firebase
 
