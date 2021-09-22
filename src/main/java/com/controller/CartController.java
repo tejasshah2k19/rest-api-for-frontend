@@ -1,5 +1,7 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,8 @@ public class CartController {
 	UserRepository userRepo;
 
 	@GetMapping("addtocart/{token}/{productId}")
-	public ResponseEntity<CartEntity> addToCart(@PathVariable("token") String token, @PathVariable("productId") int productId) {
+	public ResponseEntity<CartEntity> addToCart(@PathVariable("token") String token,
+			@PathVariable("productId") int productId) {
 
 		CartEntity cart = new CartEntity();
 
@@ -35,4 +38,21 @@ public class CartController {
 		resp.setStatus(200);
 		return resp;
 	}
+
+	@GetMapping("/carts/{token}")
+	public ResponseEntity<List<CartEntity>> viewCart(@PathVariable("token") String token) {
+
+		UserEntity user = userRepo.findByAuthToken(token).get(0);
+
+		List<CartEntity> carts = cartRepo.findById(user.getUserId());
+
+		// firebase
+
+		ResponseEntity<List<CartEntity>> resp = new ResponseEntity<>();
+		resp.setMsg("cart retervied");
+		resp.setStatus(200);
+		resp.setData(carts);
+		return resp;
+	}
+
 }
